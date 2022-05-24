@@ -9,6 +9,8 @@ import Cadastro from "../pages/cadastro";
 import ConfigUsuario from "../pages/configUsuario"
 import Filmes from "../pages/filmes";
 import Series from "../pages/series";
+import Catalogo from "../pages/catalogo/index";
+import AdicionarFilmes from "../pages/adicionarFilmes/index";
 
 function Rotas() {
   return (
@@ -17,6 +19,8 @@ function Rotas() {
         <Route element={<Home />} path="/" exact />
         <Route element={<Login />} path="/login" />
         <Route element={<Adm />} path="/adm" />
+        <Route element={<Catalogo />} path="/catalogo" />
+        <Route element={<AdicionarFilmes />} path="/adicionarFilmes" />
         <Route element={<Busca />} path="/busca" />
         <Route element={<Cadastro />} path="/cadastro" />
         <Route element={<ConfigUsuario />} path="/configUsuario" />

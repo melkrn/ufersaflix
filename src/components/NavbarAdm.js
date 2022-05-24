@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
 import logoImage from '../assets/LOGO.png';
 
-class NavbarUser extends Component {
+class NavbarAdm extends Component {
     render() {
         return (
             <Container fluid>
@@ -19,18 +19,8 @@ class NavbarUser extends Component {
                                 <li className="nav-item">
                                     <a className="nav-link active" aria-current="page" href="/">INICIO</a>
                                 </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="/filmes">FILMES</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="/series">SÉRIES</a>
-                                </li>
                             </ul>
-                            <form className="d-flex">
-                                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                                <button className="btn btn-primary" type="submit">Pesquisar</button>
-                            </form>
-                            <ul className="navbar-nav" style={{ height: "40px" }}>
+                            <ul className="navbar-nav" style={{height: "40px"}}>
                                 <li className="nav-item dropdown">
                                     <a className="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
                                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -38,7 +28,7 @@ class NavbarUser extends Component {
                                     </a>
                                     <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                                         <li><a className="dropdown-item" href="/configUsuario">CONFIGURAÇÃO DE CONTA</a></li>
-                                        <li><a className="dropdown-item" href='/login'>SAIR</a></li>
+                                        <li><a className="dropdown-item" href="/">SAIR</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -46,9 +36,8 @@ class NavbarUser extends Component {
                     </div>
                 </nav>
             </Container>
-
         );
     }
 }
 
-export default NavbarUser;
+export default NavbarAdm;
