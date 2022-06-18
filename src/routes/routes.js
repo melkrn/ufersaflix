@@ -1,5 +1,10 @@
-import React from "react";
-import { Route, BrowserRouter, Routes } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { 
+  Route, 
+  BrowserRouter, 
+  Routes,
+  Navigate,
+} from "react-router-dom";
 
 import Login from "../pages/login";
 import Home from "../pages/home";
@@ -11,22 +16,31 @@ import Filmes from "../pages/filmes";
 import Series from "../pages/series";
 import Catalogo from "../pages/catalogo/index";
 import AdicionarFilmes from "../pages/adicionarFilmes/index";
+import { AuthContext, AuthProvider } from "../context/authContext";
 
-function Rotas() {
+const Rotas = () => {
+
+  const Private = ({children}) => {
+    const { authenticated, loading } = useContext(AuthContext);
+
+    if(loading){
+      return <div>Carregando...</div>
+    }
+
+    if(!authenticated){
+      return <Navigate to='/login' />;
+    }
+    return children;
+  }
+
   return (
     <BrowserRouter>
-      <Routes>
-        <Route element={<Home />} path="/" exact />
-        <Route element={<Login />} path="/login" />
-        <Route element={<Adm />} path="/adm" />
-        <Route element={<Catalogo />} path="/catalogo" />
-        <Route element={<AdicionarFilmes />} path="/adicionarFilmes" />
-        <Route element={<Busca />} path="/busca" />
-        <Route element={<Cadastro />} path="/cadastro" />
-        <Route element={<ConfigUsuario />} path="/configUsuario" />
-        <Route element={<Filmes />} path="/filmes" />
-        <Route element={<Series />} path="/series" />
-      </Routes>
+      <AuthProvider>
+          <Routes>
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/" element={<Private><Home /></Private>} />
+          </Routes>
+        </AuthProvider>
     </BrowserRouter>
   )
 }

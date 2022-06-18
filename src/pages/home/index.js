@@ -1,9 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import NavbarUser from '../../components/NavbarUser';
 import CarouselSlideCard from '../../components/CarouselSlideCard';
 import CarouselContainer from '../../components/CarouselContainer'
+import { useContext } from 'react';
+import { AuthContext } from '../../context/authContext';
+import { useEffect } from 'react';
+import { getUsers } from '../../services/api';
 
 function Home() {
+
+
+    const {authenticated, logout} = useContext(AuthContext);
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(()=>{
+        (async () => {
+            const response = await getUsers();
+            setUsers(response.data);
+            setLoading(false);
+        })();
+
+    }, []);
+
+    const handleLogout = () => {
+        logout();
+    }
+
+    if(loading){
+        return <div>Carregando dados...</div>
+    }
+
     return (
         <div style={{ backgroundColor: "#393939", color: "white" }}>
             <NavbarUser />
