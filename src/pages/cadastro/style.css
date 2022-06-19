@@ -1,0 +1,42 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #393939;
+}
+
+.titulo{
+    
+}
+
+.formulario{
+    background-color: #393939;
+    color: white;
+}
+
+.botao-submit{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    margin-bottom: 10px;
+}
+
+.botao-submit:hover{
+    background-color: rgba(41, 93, 172, 0.548);
+}
+
+.botao-voltar{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+}
+
+.botao-voltar:hover{
+    background-color: rgba(41, 93, 172, 0.548);
+}
