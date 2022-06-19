@@ -23,7 +23,7 @@ function Login() {
     }
 
     return(
-        <div>
+        <div style={{ backgroundColor: "#393939", color: "white", position: "absolute", height: "100%", width: "100%" }}>
             <Container>
                 <div className="title">
                    <img src={logoImage}></img>
