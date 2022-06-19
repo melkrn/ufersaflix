@@ -1,12 +1,42 @@
-
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #393939;
+}
 .title{
 
 }
 
 .form-login{
+    color: white;
+}
+
+.button-entrar{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    margin-bottom: 10px;
+}
+
+.button-entrar:hover{
+    background-color: rgba(41, 93, 172, 0.548);
 
 }
 
-.buttons{
-    
+.button-registrar{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+}
+
+.button-registrar:hover{
+    background-color: rgba(41, 93, 172, 0.548);
+
 }
