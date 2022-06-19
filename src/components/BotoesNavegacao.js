@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
 
 
-class BotoesNavegacao extends Comment{
+class BotoesNavegacao extends React.Component{
     render(){
         return(
         
