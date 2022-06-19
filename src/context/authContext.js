@@ -24,19 +24,30 @@ export const AuthProvider = ({children}) => {
 
     const login = async (email, password) => {
 
-        const response = await createSession(email, password);
+        // const response = await createSession(email, password);
 
         // rever essa linha
-        const loggedUser = response.data.user;
-        const token = response.data.token;
+        // const loggedUser = response.data.user;
+        // const token = response.data.token;
 
-        localStorage.setItem("user", JSON.stringify(loggedUser))
-        localStorage.setItem("token", token);
+        const loggedUser = {
+            id:'123',
+            email,
+        }
 
-        api.defaults.headers.Authorization = `Bearer ${token}`
+        if(password === '123')
+        {
+            setUser(loggedUser);
+            navigate('/');
+        }
+
+        // localStorage.setItem("user", JSON.stringify(loggedUser))
+        // localStorage.setItem("token", token);
+
+        // api.defaults.headers.Authorization = `Bearer ${token}`
        
-        setUser(loggedUser);
-        navigate("/");
+        // setUser(loggedUser);
+        // navigate("/");
 
     }
 
