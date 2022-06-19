@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavbarAdm from "../../components/NavbarAdm";
 import Button from 'react-bootstrap/Button';
 import { Col, Form } from "react-bootstrap";
@@ -6,14 +6,26 @@ import { Container } from "react-bootstrap";
 import { Row } from "react-bootstrap";
 import { Table } from "react-bootstrap";
 import BotoesNavegacao from "../../components/BotoesNavegacao";
+import {api} from "../../services/api";
 
 function Adm(){
+    //Pegar dados de usuários
+    const [users, setUser] = useState([]);
+    useEffect(() => {
+        api
+            .get("usuario")
+            .then((response) => {
+            setUser(response.data);
+            })
+            .catch((err) => console.log(err));
+    }, []);
+    
     return(
         <div style={{
             backgroundColor:"#393939",
             color:"white",
         }}>
-            <Container fluid>
+            <Container fluid style={{ backgroundColor: "#393939", color: "white", position: "absolute", height: "100%", width: "100%" }}>
                 <div>
                 <NavbarAdm/>
                 <BotoesNavegacao/>
@@ -35,47 +47,58 @@ function Adm(){
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">STATUS</th>
                             <th scope="col">NOME</th>
                             <th scope="col">E-MAIL</th>
-                            <th scope="col">MATRÍCULA</th>
-                            <th scope="col">DATA DE NASCIMENTO</th>
+                            <th scope="col">SENHA</th>
+                            <th scope="col">ADM</th>
                             <th scope="col">EDITAR</th>
                             <th scope="col">DELETAR</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>ON</td>
-                            <td>João</td>
-                            <td>joao@gmail.com</td>
-                            <td>2222****</td>
-                            <td>00/00/0000</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>ON</td>
-                            <td>Lucas</td>
-                            <td>lucas@gmail.com</td>
-                            <td>2222****</td>
-                            <td>00/00/0000</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>ON</td>
-                            <td>Pedro</td>
-                            <td>pedro@gmail.com</td>
-                            <td>2222****</td>
-                            <td>00/00/0000</td>
-                        </tr>
+                    {users.map((userItem) => {
+                        var adm = "Não";
+                        if(userItem.adm == true) {
+                            adm = "Sim";
+                        }
+                        return (
+                            <tr key={userItem.id}>
+                                <th scope="row">{userItem.id}</th>
+                                <td>{userItem.nome}</td>
+                                <td>{userItem.email}</td>
+                                <td>{userItem.senha}</td>
+                                <td>{adm}</td>
+                                <td><Button onClick={() => updateUser(userItem)}>EDITAR</Button></td>
+                                <td><Button onClick={() => deleteUser(userItem.id)}>Deletar</Button></td>
+                            </tr>
+                        )
+                    })}
                     </tbody>
                 </Table>
             </Container>
         </div>
     )
+    function updateUser(userItem) {
+        api
+            .put(`/usuario/${userItem.id}`, {
+                nome: prompt("Digite um novo nome: ", userItem.nome),
+                email: prompt("Digite um novo e-mail: ", userItem.email),
+                senha: prompt("Digite uma nova senha: ", userItem.senha),
+                })
+        .then((response) => {
+            setUser(response.data);
+        });
+        window.location.reload(false);
+    }
+
+    function deleteUser(userItem) {
+        api.delete(`/usuario/${userItem.id}`)
+            .then((response) => {
+                setUser(response.data);
+            });
+        window.location.reload(false);
+    }
 }
+
 
 export default Adm;
