@@ -7,7 +7,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({children}) => {
 
     const navigate = useNavigate();
-    const [ user, setUser ] = useState(null);
+    const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(()=>{
@@ -25,7 +25,6 @@ export const AuthProvider = ({children}) => {
     const login = async (email, password) => {
 
         const response = await createSession(email, password);
-
 
         // rever essa linha
         const loggedUser = response.data.user;

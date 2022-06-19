@@ -1,22 +1,27 @@
 import React, { useContext, useState } from "react";
 import logoImage from '../../assets/LOGOloginpng.png';
-import FormLogin from "../../components/FormLogin";
 import { AuthContext } from "../../context/authContext";
+import { Link } from "react-router-dom";
+import styles from './style.css';
 
 function Login() {
 
     const { authenticated, login } = useContext(AuthContext);
-
     const [email, setEmail] = useState("");
-    const [senha, setSenha] = useState("");
+    const [password, setSenha] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        login(email, password);
     }
 
     return(
         <div>
-            <form>
+            <div className="title">
+                <h1>UFERSA-FLIX</h1>
+                <p>{String(authenticated)}</p>
+            </div>
+            <form className="form-login">
                 <label>E-MAIL</label>
                 <input 
                 type='email'
@@ -28,13 +33,14 @@ function Login() {
                 <label>SENHA</label>
                 <input 
                 type='password'
-                name='senha'
-                id='senha'
-                value={senha}
+                name='password'
+                id='password'
+                value={password}
                 onChange={(e)=>{setSenha(e.target.value)}}
                 />
-                <div>
+                <div className="buttons">
                     <button type="submit" onClick={handleSubmit}>ENTRAR</button>
+                    <button type="submit"><Link to='/cadastro'>REGISTRAR</Link></button>
                 </div>
             </form>
         </div>

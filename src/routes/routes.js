@@ -10,11 +10,10 @@ import Login from "../pages/login";
 import Home from "../pages/home";
 import Adm from "../pages/adm";
 import Busca from "../pages/busca";
-import Cadastro from "../pages/cadastro";
 import ConfigUsuario from "../pages/configUsuario"
 import Filmes from "../pages/filmes";
 import Series from "../pages/series";
-import Catalogo from "../pages/catalogo/index";
+import Cadastro from "../pages/cadastro";
 import AdicionarFilmes from "../pages/adicionarFilmes/index";
 import { AuthContext, AuthProvider } from "../context/authContext";
 
@@ -39,6 +38,7 @@ const Rotas = () => {
           <Routes>
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/" element={<Private><Home /></Private>} />
+            <Route exact path="/cadastro" element={<Cadastro />} />
           </Routes>
         </AuthProvider>
     </BrowserRouter>
