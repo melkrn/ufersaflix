@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { LayoutLogin } from "../../components/LayoutLogin";
 import './style.css';
 import { api } from "../../services/api";
 
@@ -18,7 +17,7 @@ function Cadastro(){
     }
 
     return(
-        <LayoutLogin>
+        <div>
             <form className="">
                 <div>
                     <h1>CADASTRE-SE</h1>
@@ -67,7 +66,7 @@ function Cadastro(){
                     <button type="submit" onClick={onSubmit}>CADASTRAR</button>
                 </div>
             </form>
-        </LayoutLogin>
+        </div>
     )
 }
 
