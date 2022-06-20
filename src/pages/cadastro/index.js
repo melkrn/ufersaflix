@@ -3,7 +3,7 @@ import './style.css';
 import { api } from "../../services/api";
 import { Container } from "reactstrap";
 import { useNavigate } from "react-router-dom";
-import NavbarUser from "../../components/NavbarUser";
+import logoUfersaFlix from "../../assets/LOGOloginpng.png";
 
 const initialValues = {
     nome: '',
@@ -48,9 +48,10 @@ function Cadastro(){
     }
 
     return(
-        <div className="container">
+        <div style={{ backgroundColor: "#393939", color: "white", 
+            position: "absolute", height: "100%", width: "100%" }}>
             <Container>
-                <NavbarUser/>
+                <img src={logoUfersaFlix}/>
                 <form className="formulario">
                     <div>
                         <h1 className="titulo">CADASTRE-SE</h1>
