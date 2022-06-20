@@ -1,4 +1,3 @@
-import { getMouseEventOptions } from "@testing-library/user-event/dist/utils";
 import React, { useState, useEffect } from "react";
 // importar metodo getMovies
 
