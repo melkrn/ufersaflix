@@ -1,20 +1,43 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import logoImage from '../../assets/LOGOloginpng.png';
 import { AuthContext } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../services/api";
 import './style.css';
 import { Container } from "react-bootstrap";
+
+const initialValues = {
+    email: '',
+    senha: '',
+}
 
 function Login() {
 
     const { authenticated, login } = useContext(AuthContext);
-    const [email, setEmail] = useState("");
-    const [password, setSenha] = useState("");
+    const [values, setValues] = useState(initialValues);
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    function onChange(e){
+        const { name, value } = e.target;
+        setValues({...values, [name]: value});
+    }
+
+
+    async function onSubmit(e){
         e.preventDefault();
-        login(email, password);
+
+        const userData = {
+            email: values.email,
+            senha: values.senha,
+        }
+
+        api.get("https://apiufersaflix.herokuapp.com/usuario", userData)
+        .then((response) => {
+            login(userData.email, userData.senha);
+        }).catch((err)=>{
+            console.error("erro login: " + err.response.data);
+            setValues(initialValues);
+        })
     }
 
     const goRegister = (e) => {
@@ -23,7 +46,7 @@ function Login() {
     }
 
     return(
-        <div style={{ backgroundColor: "#393939", color: "white", position: "absolute", height: "100%", width: "100%" }}>
+        <div className="container">
             <Container>
                 <div className="title">
                    <img src={logoImage}></img>
@@ -35,21 +58,22 @@ function Login() {
                     type='email'
                     name='email'
                     id='email'
-                    value={email}
-                    onChange={(e)=>{setEmail(e.target.value)}}
+                    value={values.email}
+                    onChange={onChange}
                     />
                     <br/>
                     <label>SENHA</label>
                     <br/>
                     <input 
                     type='password'
-                    name='password'
-                    id='password'
-                    value={password}
-                    onChange={(e)=>{setSenha(e.target.value)}}
+                    autoComplete="off"
+                    name='senha'
+                    id='senha'
+                    value={values.senha}
+                    onChange={onChange}
                     />
                     <div className="buttons">
-                        <button className="button-entrar" type="submit" onClick={handleSubmit}>ENTRAR</button>
+                        <button className="button-entrar" type="submit" onClick={onSubmit}>ENTRAR</button>
                         <button className="button-registrar" type="submit" onClick={goRegister}>REGISTRAR</button>
                     </div>
                 </form>
