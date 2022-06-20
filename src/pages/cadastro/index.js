@@ -91,11 +91,6 @@ function Cadastro(){
                     </div>
                 </form>
             </Container>
-            <p>{values.nome}</p>
-            <br/>
-            <p>{values.email}</p>
-            <br/>
-            <p>{values.senha}</p>
         </div>
     )
 }
