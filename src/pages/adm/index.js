@@ -69,7 +69,7 @@ function Adm(){
                                 <td>{userItem.senha}</td>
                                 <td>{adm}</td>
                                 <td><Button onClick={() => updateUser(userItem)}>EDITAR</Button></td>
-                                <td><Button onClick={() => deleteUser(userItem.id)}>Deletar</Button></td>
+                                <td><Button onClick={() => deleteUser(userItem.id)}>DELETAR</Button></td>
                             </tr>
                         )
                     })}
@@ -79,7 +79,7 @@ function Adm(){
         </div>
     )
     function updateUser(userItem) {
-        api
+        /*api
             .put(`/usuario/${userItem.id}`, {
                 nome: prompt("Digite um novo nome: ", userItem.nome),
                 email: prompt("Digite um novo e-mail: ", userItem.email),
@@ -88,15 +88,18 @@ function Adm(){
         .then((response) => {
             setUser(response.data);
         });
-        window.location.reload(false);
+        window.location.reload(false);*/
     }
 
-    function deleteUser(userItem) {
-        api.delete(`/usuario/${userItem.id}`)
-            .then((response) => {
-                setUser(response.data);
+    function deleteUser(idUser) {
+        let textoConfirmacao = "Você tem certeza de que deseja excluir este filme?";
+        if(window.confirm(textoConfirmacao) == true) {
+            api.delete(`/filme/${idUser}`)
+                .then((response) => {
+                    setUser(response.data);
             });
-        window.location.reload(false);
+            window.location.reload(false);
+        }
     }
 }
 

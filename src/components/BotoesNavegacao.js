@@ -12,12 +12,13 @@ class BotoesNavegacao extends React.Component{
         <Container fluid>
             <div>
                 <Button variant="outline-primary"><Link to="/adm">Usuario</Link></Button>{' '}
-                <Button variant="outline-primary"><Link to="/Catalogo">Catalogo</Link></Button>{' '}
-                <Button variant="outline-primary"><Link to="/AdicionarFilmes">adicionarFilmes</Link></Button>{' '}
+                <Button variant="outline-primary"><Link to="/catalogo">Catálogo</Link></Button>{' '}
+                <Button variant="outline-primary"><Link to="/adicionarFilmes">Adicionar filmes</Link></Button>{' '}
             </div>
         </Container>
         )
     }
 }
+
 
 export default BotoesNavegacao;
