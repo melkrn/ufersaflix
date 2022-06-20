@@ -68,7 +68,7 @@ function Adm(){
                                 <td>{userItem.email}</td>
                                 <td>{userItem.senha}</td>
                                 <td>{adm}</td>
-                                <td><Button onClick={() => updateUser(userItem)}>EDITAR</Button></td>
+                                <td><Button onClick={() => updateUser(userItem.id)}>EDITAR</Button></td>
                                 <td><Button onClick={() => deleteUser(userItem.id)}>DELETAR</Button></td>
                             </tr>
                         )
@@ -78,17 +78,10 @@ function Adm(){
             </Container>
         </div>
     )
-    function updateUser(userItem) {
-        api
-            .put(`/usuario/${userItem.id}`, {
-                nome: prompt("Digite um novo nome: ", userItem.nome),
-                email: prompt("Digite um novo e-mail: ", userItem.email),
-                senha: prompt("Digite uma nova senha: ", userItem.senha),
-                })
-        .then((response) => {
-            setUser(response.data);
-        });
-        window.location.reload(false);
+    function updateUser(idUser) {
+        let parametros = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+        width=300,height=300,left=-1000,top=-1000`;
+        window.open(`/editarUsuario/${idUser}`,'teste',parametros);
     }
 
     function deleteUser(idUser) {

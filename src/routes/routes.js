@@ -16,6 +16,7 @@ import Cadastro from "../pages/cadastro";
 import AdicionarFilmes from "../pages/adicionarFilmes";
 import Catalogo from "../pages/catalogo";
 import EditarFilme from "../pages/editarFilme";
+import EditarUsuario from "../pages/editarUsuario";
 import { AuthContext, AuthProvider } from "../context/authContext";
 
 const Rotas = () => {
@@ -46,6 +47,7 @@ const Rotas = () => {
             <Route exact path="/busca" element={<Busca />} />
             <Route path="/adicionarFilmes" element={<AdicionarFilmes />} />
             <Route exact path="/editarFilme/:id" element={<EditarFilme />} />
+            <Route exact path="/editarUsuario/:id" element={<EditarUsuario />} />
             <Route path={"/catalogo"} element={<Catalogo />}/>
           </Routes>
         </AuthProvider>
