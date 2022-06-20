@@ -62,9 +62,26 @@ function AdicionarFilmes(){
     )
 
     function submeterFilme() {
-        api.post('/filme', movie)
-        alert("Filme adicionado com sucesso!")
-        window.location.reload(false);
+        var erro = false;
+        if(movie.genero == "") {
+            erro = true;
+        }
+        if(movie.urlimage == "") {
+            erro = true;
+        }
+        if(movie.titulo == "") {
+            erro = true;
+        }
+        if(movie.urlfilme == "") {
+            erro = true;
+        }
+        if(erro == false) {
+            api.post('/filme', movie)
+            alert("Filme adicionado com sucesso!")
+            window.location.reload(false);
+        } else {
+            alert("Todos os campos precisam ser preenchidos")
+        }
     }
 }
 
