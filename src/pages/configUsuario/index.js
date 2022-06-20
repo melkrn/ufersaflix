@@ -15,7 +15,9 @@ function ConfigUsuario(){
             color:"white",
             justifyItems:"center",
             alignItems:"center",
-            
+            position: "absolute", 
+            height: "100%", 
+            width: "100%"
         }}>
             <NavbarUser/>
             <Container fluid>
