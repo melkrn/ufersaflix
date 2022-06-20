@@ -24,9 +24,8 @@ function Cadastro(){
         navigate('/login')
     }
     return(
-        <div className="container">
+        <div style={{ backgroundColor: "#393939", color: "white", position: "absolute", height: "100%", width: "100%" }}>
             <Container>
-                <NavbarUser/>
                 <form className="formulario">
                     <div>
                         <h1 className="titulo">CADASTRE-SE</h1>
