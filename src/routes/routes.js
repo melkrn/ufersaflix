@@ -46,7 +46,7 @@ const Rotas = () => {
             <Route exact path="/busca" element={<Busca />} />
             <Route path="/adicionarFilmes" element={<AdicionarFilmes />} />
             <Route exact path="/editarFilme/:id" element={<EditarFilme />} />
-            <Route path={"/catalogo/:id"} element={<Catalogo />}/>
+            <Route path={"/catalogo"} element={<Catalogo />}/>
           </Routes>
         </AuthProvider>
     </BrowserRouter>

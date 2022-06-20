@@ -18,7 +18,7 @@ function Catalogo(){
     //Pegar dados dos filmes
     const [movies, setMovie] = useState([]);
     //Pegar dados de um filme específico
-    let {id} = useParams();
+
     useEffect(() => {
         api
             .get("filme")
@@ -57,7 +57,7 @@ function Catalogo(){
                             <th scope="col">ID</th>
                             <th scope="col">TÍTULO</th>
                             <th scope="col">GÊNERO</th>
-                            <th scope="col">DIRETOR</th>
+                            <th scope="col">URL</th>
                             <th scope="col">EDITAR</th>
                             <th scope="col">DELETAR</th>
                         </tr>
@@ -69,63 +69,9 @@ function Catalogo(){
                                 <th scope="row">{movieItem.id}</th>
                                 <td>{movieItem.titulo}</td>
                                 <td>{movieItem.genero}</td>
-                                <td>{movieItem.diretor}</td>
-                                <td><Button onClick={handleShowMovie}><Link to={`/filme/${movieItem.id}`} 
-                                style={{textDecoration:"inherit",color:"inherit"}}>EDITAR</Link></Button></td>
-                                    <Modal show={show} onHide={handleCloseMovie} animation={false}>
-                                        <Modal.Header closeButton>
-                                        <Modal.Title>Editar {movieItem.titulo}</Modal.Title>
-                                        </Modal.Header>
-                                        <Modal.Body>
-                                            <Form>
-                                                <div>
-                                                    <img src={movieItem.urlimage}></img> <br />
-                                                    {id}
-                                                </div>
-                                                <br />
-                                                <div>
-                                                    <span>Título:</span> <br />
-                                                    <input id="titulo" type="text" defaultValue={movieItem.titulo}></input>
-                                                    
-                                                </div>
-                                                <br />
-                                                <div>
-                                                    <span>URL:</span> <br />
-                                                    <input id="urlfilme" type="text" defaultValue={movieItem.urlfilme}></input>
-                                                </div>
-                                                <br />
-                                                <div>
-                                                    <span>Elenco:</span> <br />
-                                                    <textarea defaultValue={movieItem.elenco} cols="50" rows="5"></textarea>
-                                                </div>
-                                                <br />
-                                                <div>
-                                                    <span>Sinopse:</span> <br />
-                                                    <textarea defaultValue={movieItem.sinopse} cols="50" rows="5"></textarea>
-                                                </div>
-                                                <br />
-                                                <div>
-                                                    <span>Gênero:</span> <br />
-                                                    <input id="genero" type="text" value={movieItem.genero}></input>
-                                                </div>
-                                                <br />
-                                                <div>
-                                                    <span>Diretor:</span> <br />
-                                                    <input id="diretor" type="text" value={movieItem.diretor}></input>
-                                                </div>
-
-                                            </Form>
-                                        </Modal.Body>
-                                        <Modal.Footer>
-                                        <Button variant="secondary" onClick={handleCloseMovie}>
-                                            Fechar
-                                        </Button>
-                                        <Button variant="primary" onClick={handleCloseMovie}>
-                                            Salvar mudanças
-                                        </Button>
-                                        </Modal.Footer>
-                                    </Modal>
-                                <td><Button onClick={() => deleteUser(movieItem.id)}>DELETAR</Button></td>
+                                <td>{movieItem.urlfilme}</td>
+                                <td><Button onClick={() => editarFilme(movieItem.id)}>EDITAR</Button></td>
+                                <td><Button onClick={() => deleteMovie(movieItem.id)}>DELETAR</Button></td>
                             </tr>
                         )
                     })}
@@ -135,28 +81,21 @@ function Catalogo(){
         </div>
     )
     
-    function updateUser(userItem) {
-        api
-            .put(`/usuario/${userItem.id}`, {
-                nome: prompt("Digite um novo nome: ", userItem.nome),
-                email: prompt("Digite um novo e-mail: ", userItem.email),
-                senha: prompt("Digite uma nova senha: ", userItem.senha),
-                })
-        .then((response) => {
-            setMovie(response.data);
-        });
-        window.location.reload(false);
-    }
-
-    function deleteUser(idMovie) {
+    function deleteMovie(idMovie) {
         let textoConfirmacao = "Você tem certeza de que deseja excluir este filme?";
         if(window.confirm(textoConfirmacao) == true) {
             api.delete(`/filme/${idMovie}`)
                 .then((response) => {
-                    setMovie(response.data);
+                    setMovie(null);
                 });
             window.location.reload(false);
         }
+    }
+
+    function editarFilme(idMovie) {
+        let parametros = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+        width=700,height=300,left=-1000,top=-1000`;
+        window.open(`/editarFilme/${idMovie}`,'teste',parametros);
     }
 }
 

@@ -21,7 +21,7 @@ function AdicionarFilmes(){
     const changeHandler=(e)=>{
         if (e.target.files.length > 0) {
          filename = e.target.files[0].name;
-          filename = "../../assets/movieCards/" + filename;
+          filename = "../assets/movieCards/" + filename;
           movie.urlimage = filename
         }
       }
