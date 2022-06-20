@@ -1,11 +1,73 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavbarAdm from "../../components/NavbarAdm";
+import Button from 'react-bootstrap/Button';
+import { Col, Form } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+import { Row } from "react-bootstrap";
+import { Table } from "react-bootstrap";
+import BotoesNavegacao from "../../components/BotoesNavegacao";
+import {api} from "../../services/api";
 
 
 function AdicionarFilmes(){
+    var filename = "";
+    const [movie, setMovie] = useState({
+        titulo: '',
+        genero: '',
+        urlimage: '',
+        urlfilme: ''
+    });
+
+    const changeHandler=(e)=>{
+        if (e.target.files.length > 0) {
+         filename = e.target.files[0].name;
+          filename = "../../assets/movieCards/" + filename;
+          movie.urlimage = filename
+        }
+      }
+
     return(
-        <NavbarAdm />
+        <div style={{ backgroundColor: "#393939", color: "white", position: "absolute", height: "100%", width: "100%"}}>
+            <NavbarAdm />
+            <BotoesNavegacao />
+            <div div style={{ backgroundColor: "#393939", color: "white", position: "absolute", height: "100%", width: "100%"}}>
+                <br />
+                <Form>
+                    <div style={{width:"50%"}}>
+                        <label>IMAGEM:</label> <br/>
+                        <input onChange={changeHandler} className="form-control" type="file"></input>
+                    </div>
+                    <br/>
+                    <div>
+                        <label>TÍTULO:</label>
+                        <input onChange={(e) => setMovie({ ...movie, titulo: e.target.value })} type="text" style={{width:"50%"}}></input>
+                    </div>
+                    <br/>
+                    <div>
+                        <label>LINK:</label>
+                        <input onChange={(e) => setMovie({ ...movie, urlfilme: e.target.value })} type="text" style={{width:"50%"}}></input>
+                    </div>
+                    <br/>
+                    <div>
+                        <label>GÊNERO:</label>
+                        <input onChange={(e) => setMovie({ ...movie, genero: e.target.value })} type="text" style={{width:"50%"}}></input>
+                    </div>
+                    <br/>
+                    <div>
+                        <Button onClick={submeterFilme}>SALVAR</Button>
+                    </div>
+                </Form >
+            </div>
+        </div>
     )
+
+    function submeterFilme() {
+        api.post('/filme', movie)
+        alert("Filme adicionado com sucesso!")
+        window.location.reload(false);
+    }
 }
+
+
 
 export default AdicionarFilmes;
