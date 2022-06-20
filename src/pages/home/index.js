@@ -9,28 +9,6 @@ import { getUsers } from '../../services/api';
 
 function Home() {
 
-
-    // const {authenticated, logout} = useContext(AuthContext);
-    // const [users, setUsers] = useState([]);
-    // const [loading, setLoading] = useState(true);
-
-    // useEffect(()=>{
-    //     (async () => {
-    //         const response = await getUsers();
-    //         setUsers(response.data);
-    //         setLoading(false);
-    //     })();
-
-    // }, []);
-
-    // const handleLogout = () => {
-    //     logout();
-    // }
-
-    // if(loading){
-    //     return <div>Carregando dados...</div>
-    // }
-
     return (
         <div style={{ backgroundColor: "#393939", color: "white", position: "absolute", height: "100%", width: "100%" }}>
             <NavbarUser />
