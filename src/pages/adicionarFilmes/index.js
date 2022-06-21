@@ -34,23 +34,27 @@ function AdicionarFilmes(){
                 <br />
                 <Form>
                     <div style={{width:"50%"}}>
-                        <label>IMAGEM:</label> <br/>
-                        <input onChange={(e) => setMovie({ ...movie, urlimage: e.target.value })} className="form-control" type="text"></input>
+                        <label>IMAGEM:</label><br/>
+                        <input onChange={(e) => setMovie({ ...movie, urlimage: e.target.value })} 
+                            type="text" style={{width:"100%"}}></input>
                     </div>
                     <br/>
                     <div>
-                        <label>TÍTULO:</label>
-                        <input onChange={(e) => setMovie({ ...movie, titulo: e.target.value })} type="text" style={{width:"50%"}}></input>
+                        <label>TÍTULO:</label><br/>
+                        <input onChange={(e) => setMovie({ ...movie, titulo: e.target.value })} 
+                            type="text" style={{width:"50%"}}></input>
                     </div>
                     <br/>
                     <div>
-                        <label>LINK:</label>
-                        <input onChange={(e) => setMovie({ ...movie, urlfilme: e.target.value })} type="text" style={{width:"50%"}}></input>
+                        <label>LINK:</label><br/>
+                        <input onChange={(e) => setMovie({ ...movie, urlfilme: e.target.value })} 
+                            type="text" style={{width:"50%"}}></input>
                     </div>
                     <br/>
                     <div>
-                        <label>GÊNERO:</label>
-                        <input onChange={(e) => setMovie({ ...movie, genero: e.target.value })} type="text" style={{width:"50%"}}></input>
+                        <label>GÊNERO:</label><br/>
+                        <input onChange={(e) => setMovie({ ...movie, genero: e.target.value })}
+                            type="text" style={{width:"50%"}}></input>
                     </div>
                     <br/>
                     <div>
