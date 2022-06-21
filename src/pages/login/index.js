@@ -23,7 +23,7 @@ function Login() {
     }
 
 
-    async function onSubmit(e){
+    function onSubmit(e){
         e.preventDefault();
 
         const userData = {
