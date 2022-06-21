@@ -73,7 +73,7 @@ function EditarFilme() {
         if(editMovie.urlfilme == null || editMovie.urlfilme == "") {
             editMovie.urlfilme = movie.urlfilme;
         }
-        alert(editMovie.urlimage) 
+
         api
             .put(`/filme/${id}`, {
                 titulo: editMovie.titulo,
