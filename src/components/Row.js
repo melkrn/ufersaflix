@@ -29,13 +29,16 @@ function Row({movies}){
             {
                 movies?.map((movie) => {
                     return(
-                        <img 
-                        className="movie-card"
-                        key={movie.id}
-                        onClick={() => handleOnClick(movie)}
-                        src={movie.urlimage} 
-                        alt={movie.titulo}>
-                        </img>
+                        <div>
+                            <h1 className="title-card">{movie.titulo}</h1>
+                            <img 
+                            className="movie-card"
+                            key={movie.id}
+                            onClick={() => handleOnClick(movie)}
+                            src={movie.urlimage} 
+                            alt={movie.titulo}>
+                            </img>
+                        </div>
                     )
                 })
             }
