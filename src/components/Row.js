@@ -30,6 +30,7 @@ function Row({movies}){
                 movies?.map((movie) => {
                     return(
                         <img 
+                        className="movie-card"
                         key={movie.id}
                         onClick={() => handleOnClick(movie)}
                         src={movie.urlimage} 
