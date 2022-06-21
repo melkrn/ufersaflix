@@ -9,44 +9,46 @@ import { getUsers } from '../../services/api';
 
 function Home() {
 
-    return (
-        <div style={{ backgroundColor: "#393939", color: "white", position: "absolute", height: "100%", width: "100%" }}>
-            <NavbarUser />
-            <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="carousel">
-                <div className="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" className="active"
-                        aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
-                </div>
-                <div className="carousel-inner">
-                    <div className="carousel-item active">
-                        <CarouselSlideCard />
-                    </div>
-                    <div className="carousel-item">
-                        <CarouselSlideCard />
-                    </div>
-                    <div className="carousel-item">
-                        <CarouselSlideCard />
-                    </div>
-                    <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                        data-bs-slide="prev">
-                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span className="visually-hidden">Previous</span>
-                    </button>
-                    <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                        data-bs-slide="next">
-                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span className="visually-hidden">Next</span>
-                    </button>
-                </div>
+    const [movies, setMovies] = useState([]);
+
+    const fetchMovies = async() => {
+
+        api.get("https://apiufersaflix.herokuapp.com/filme")
+        .then((response) => {
+            setMovies(response.data)
+        }).catch((err)=>{
+            console.log("Fetch Movies error: " + err);
+        })
+    }
+
+    useEffect(()=>{
+        fetchMovies();
+    },[])
+
+    function renderMovies(movies){
+        const rows = movies.map((row, index) => {
+            return(
+            <div>
+                <p>{row.urlimage}</p>
+                <img src={require(`${row.urlimage}`)} alt={row.titulo}>
+
+                </img>
             </div>
-            <br />
-            <h2 style={{ color: "white" }}>Populares: </h2>
-            <br />
-            <CarouselContainer />
+            )
+        })
+        return <h1>{rows}</h1>
+    }
+
+    return (
+        <div style={{ backgroundColor: "#393939", color: "white" }}>
+                <Container>
+                <NavbarUser />
+                <div>
+                    <h1>
+                        {renderMovies(movies)}
+                    </h1>
+                </div>
+            </Container>
         </div>
     );
 }
