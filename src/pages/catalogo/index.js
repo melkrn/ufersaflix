@@ -87,8 +87,9 @@ function Catalogo(){
             api.delete(`/filme/${idMovie}`)
                 .then((response) => {
                     setMovie(null);
+                    alert("Filme deletado com sucesso!")
+                    window.location.reload(false);
                 });
-            window.location.reload(false);
         }
     }
 

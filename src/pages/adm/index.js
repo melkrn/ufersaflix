@@ -91,8 +91,8 @@ function Adm(){
             .delete(`/usuario/${idUser}`)
             .then(() => {
                 setUser(null)
+                window.location.reload(false);
             });
-            window.location.reload(false);
         }
     }
 }
