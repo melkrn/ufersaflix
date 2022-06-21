@@ -11,9 +11,9 @@ class BotoesNavegacao extends React.Component{
         
         <Container fluid>
             <div>
-                <Button variant="outline-primary"><Link to="/adm">Usuario</Link></Button>{' '}
-                <Button variant="outline-primary"><Link to="/catalogo">Catálogo</Link></Button>{' '}
-                <Button variant="outline-primary"><Link to="/adicionarFilmes">Adicionar filmes</Link></Button>{' '}
+                <Link to="/adm"><Button variant="outline-primary">Usuário</Button>{' '}</Link>
+                <Link to="/catalogo"><Button variant="outline-primary">Catálogo</Button>{' '}</Link>
+                <Link to="/adicionarFilmes"><Button variant="outline-primary">Adicionar filmes</Button>{' '}</Link>
             </div>
         </Container>
         )

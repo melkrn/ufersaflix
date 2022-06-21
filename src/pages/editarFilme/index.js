@@ -20,23 +20,19 @@ function EditarFilme() {
     //Para editar dados do filme
     const [editMovie, setEditMovie] = useState([])
 
-    //Para pegar URL da imagem
-    var filename = "";
-    const changeHandler=(e)=>{
-        if (e.target.files.length > 0) {
-         filename = e.target.files[0].name;
-          filename = "../assets/movieCards/" + filename;
-          editMovie.urlimage = filename
-        }
-    }
-
     return(
-        <div fluid style={{ backgroundColor: "#393939", 
+        <div style={{ backgroundColor: "#393939", 
             color: "white", position: "absolute", height: "100%", width: "100%" }}>
-            <Form>
+            <Form style={{ backgroundColor: "#393939", 
+            color: "white", position: "absolute", height: "100%", width: "100%" }}>
+                <div>
+                    <img src={movie.urlimage} style={{width:"40%",height:"20%"}} />
+                </div>
+                <br/>
                 <div>
                     <label>IMAGEM:</label>
-                    <input type="file" onChange={changeHandler}></input>
+                    <input type="text" defaultValue={movie.urlimage}
+                    onChange={(e) => setEditMovie({ ...editMovie, urlimage: e.target.value })}></input>
                 </div>
                 <br/>
                 <div>
@@ -76,7 +72,8 @@ function EditarFilme() {
         }
         if(editMovie.urlfilme == null || editMovie.urlfilme == "") {
             editMovie.urlfilme = movie.urlfilme;
-        } 
+        }
+
         api
             .put(`/filme/${id}`, {
                 titulo: editMovie.titulo,

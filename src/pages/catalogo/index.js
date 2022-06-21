@@ -95,7 +95,7 @@ function Catalogo(){
 
     function editarFilme(idMovie) {
         let parametros = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
-        width=700,height=300,left=-1000,top=-1000`;
+        width=300,height=300,left=-1000,top=-1000`;
         window.open(`/editarFilme/${idMovie}`,'teste',parametros);
     }
 }
