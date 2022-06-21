@@ -9,6 +9,7 @@ import { getUsers } from '../../services/api';
 import {api} from "../../services/api"
 import {Container} from "react-bootstrap";
 import img from "../../assets/movieCards/cardfilme.jpg"
+import Row from "../../components/Row";
 function Home() {
 
     const [movies, setMovies] = useState([]);
