@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { getUsers } from '../../services/api';
 import {api} from "../../services/api"
 import {Container} from "react-bootstrap";
-
+import img from "../../assets/movieCards/cardfilme.jpg"
 function Home() {
 
     const [movies, setMovies] = useState([]);
@@ -31,24 +31,22 @@ function Home() {
         const rows = movies.map((row, index) => {
             return(
             <div>
-                <p>{row.urlimage}</p>
-                <img src={require(`${row.urlimage}`)} alt={row.titulo}>
-
-                </img>
+                <img src={row.urlimage} />
+                <img src={img}/>
             </div>
             )
         })
-        return <h1>{rows}</h1>
+        return rows
     }
 
     return (
         <div style={{ backgroundColor: "#393939", color: "white" }}>
-                <Container>
                 <NavbarUser />
+                <Container>
+
                 <div>
-                    <h1>
-                        {renderMovies(movies)}
-                    </h1>
+                    {renderMovies(movies)}
+                    
                 </div>
             </Container>
         </div>

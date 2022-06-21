@@ -35,7 +35,7 @@ function AdicionarFilmes(){
                 <Form>
                     <div style={{width:"50%"}}>
                         <label>IMAGEM:</label> <br/>
-                        <input onChange={changeHandler} className="form-control" type="file"></input>
+                        <input onChange={(e) => setMovie({ ...movie, urlimage: e.target.value })} className="form-control" type="text"></input>
                     </div>
                     <br/>
                     <div>
