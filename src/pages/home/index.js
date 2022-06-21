@@ -6,6 +6,8 @@ import { useContext } from 'react';
 import { AuthContext } from '../../context/authContext';
 import { useEffect } from 'react';
 import { getUsers } from '../../services/api';
+import {api} from "../../services/api"
+import {Container} from "react-bootstrap";
 
 function Home() {
 
