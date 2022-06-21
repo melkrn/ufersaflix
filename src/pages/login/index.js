@@ -1,8 +1,9 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import logoImage from '../../assets/LOGOloginpng.png';
 import { AuthContext } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
+import NavbarUser from "../../components/NavbarUser";
 import './style.css';
 import { Container } from "react-bootstrap";
 
@@ -22,22 +23,43 @@ function Login() {
         setValues({...values, [name]: value});
     }
 
+    function validar(){
 
-    function onSubmit(e){
-        e.preventDefault();
+        let controle = true;
 
-        const userData = {
-            email: values.email,
-            senha: values.senha,
+        if(values.email == ""){
+            controle = false;
+            alert(" E-mail incorreto ");
         }
 
-        api.get("https://apiufersaflix.herokuapp.com/usuario", userData)
-        .then((response) => {
-            login(userData.email, userData.senha);
-        }).catch((err)=>{
-            console.error("erro login: " + err.response.data);
+        if(values.senha == ""){
+            controle = false;
+            alert(" Senha incorreta ");
+        }
+
+    }
+
+
+    async function onSubmit(e){
+        e.preventDefault();
+
+        if(validar()){
             setValues(initialValues);
-        })
+        }
+        else{
+            const userData = {
+                email: values.email,
+                senha: values.senha,
+            }
+    
+            api.get("https://apiufersaflix.herokuapp.com/usuario", userData)
+            .then((response) => {
+                login(userData.email, userData.senha);
+            }).catch((err)=>{
+                console.error("erro login: " + err.response.data);
+                setValues(initialValues);
+            })
+        }
     }
 
     const goRegister = (e) => {
@@ -46,8 +68,7 @@ function Login() {
     }
 
     return(
-        <div style={{ backgroundColor: "#393939", color: "white", position: "absolute", 
-            height: "100%", width: "100%" }}>
+        <div className="container">
             <Container>
                 <div className="title">
                    <img src={logoImage}></img>
