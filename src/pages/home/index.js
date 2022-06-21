@@ -42,13 +42,9 @@ function Home() {
     return (
         <div style={{ backgroundColor: "#393939", color: "white" }}>
                 <NavbarUser />
-                <Container>
-
                 <div>
-                    {renderMovies(movies)}
-                    
+                    <Row movies={movies}/>
                 </div>
-            </Container>
         </div>
     );
 }

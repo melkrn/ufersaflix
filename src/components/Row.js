@@ -1,41 +1,47 @@
+import { getMouseEventOptions } from "@testing-library/user-event/dist/utils";
 import React, { useState, useEffect } from "react";
-// importar metodo getMovies
+import ReactPlayer from "react-player";
+import movieTrailer from "movie-trailer";
+import { api, getMovies } from "../services/api";
+import './style.css';
 
-function Row({title, path}){
-    const [movies, setMovies] = useState([]);
+function Row({movies}){
 
-    const fetchMovies = async(_path) => {
-        try {
-            /*const data = await getMovies(_path);*/
-            console.log("data + " + data);
-            setMovies(data?.results);
-        } catch (error) {
-            console.log("Error fetchMovies: " + error);
+    const [trailerUrl, setTrailerUrl] = useState("");
+    const handleOnClick = (movie) => {
+        if (trailerUrl) {
+        setTrailerUrl("");
+        } else {
+        movieTrailer(movie.titulo || "")
+            .then((url) => {
+            setTrailerUrl(url);
+            })
+            .catch((error) => {
+            console.log("Error fetching movie trailer: ", error);
+            });
         }
-    }
-
-    useEffect(()=>{
-        fetchMovies(path);
-    },[])
+    };
 
     return(
-        <div>
-            <h1>{title}</h1>
-            <div>
-                {
-                    movies?.map((movie) => {
-                        return(
-                            <img
-                            key={movie.id}
-                            src={movie.path}
-                            alt={movie.nome}
-                            >
-                            </img>
-                        )
-                    })
-                }
+        <div className="row-container">
+            <h2 className="row-header"></h2>
+            <div className="row-cards">
+            {
+                movies?.map((movie) => {
+                    return(
+                        <img 
+                        key={movie.id}
+                        onClick={() => handleOnClick(movie)}
+                        src={movie.urlimage} 
+                        alt={movie.titulo}>
+                        </img>
+                    )
+                })
+            }
             </div>
+            {trailerUrl && <ReactPlayer url={trailerUrl} playing={true} />}
         </div>
     )
-
 }
+
+export default Row;

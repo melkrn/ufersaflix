@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import './style.css';
 import { api } from "../../services/api";
-import { Container } from "reactstrap";
 import { useNavigate } from "react-router-dom";
-import logoUfersaFlix from "../../assets/LOGOloginpng.png";
+import NavbarUser from "../../components/NavbarUser";
 
 const initialValues = {
     nome: '',
     email: '',
     senha: '',
+    confirmarSenha: '',
 }
 
 function Cadastro(){
 
     const [values, setValues] = useState(initialValues);
+    const [error, setErrors] = useState();
     const navigate = useNavigate();
 
     function onChange(e){
@@ -24,22 +25,54 @@ function Cadastro(){
         });
     }
 
-    function cadastrar(e) {
+    function validar(){
+
+        let controle = true;
+
+        if(values.nome === ""){
+            controle = false;
+            alert(" Nome vazio ");
+        }
+
+        if(values.email === ""){
+            controle = false;
+            alert(" E-mail vazio ");
+        }
+
+        if(values.senha === ""){
+            controle = false;
+            alert(" Senha incorreta ");
+        }
+
+        if((values.senha !== values.confirmarSenha)){
+            controle = false;
+            alert(" Senha incorreta ");
+        }
+    }
+
+    async function cadastrar(e) {
         e.preventDefault();
 
-        const userData = {
-            nome: values.nome,
-            email: values.email,
-            senha: values.senha,
+        if(!validar()){
+            setValues(initialValues);
         }
-        api.post("https://apiufersaflix.herokuapp.com/usuario/", userData)
-        .then((response) => {
-            console.log("response: " + response.status);
-            console.log("data: " + response.data);
-            navigate('/login')
-        }).catch((err)=>{
-            console.error("erro cadastrar: " + err);
-        })
+        else{
+            const userData = {
+                nome: values.nome,
+                email: values.email,
+                senha: values.senha,
+            }
+            api.post("https://apiufersaflix.herokuapp.com/usuario/", userData)
+            .then((response) => {
+                console.log("response: " + response.status);
+                console.log("data: " + response.data);
+                alert("Cadastro Realizado");
+                navigate('/login')
+            }).catch((err)=>{
+                console.error("erro cadastrar: " + err);
+                setValues(initialValues);
+            })
+        }
     }
 
     const getBack = (e) => {
@@ -48,10 +81,9 @@ function Cadastro(){
     }
 
     return(
-        <div style={{ backgroundColor: "#393939", color: "white", 
-            position: "absolute", height: "100%", width: "100%" }}>
-            <Container>
-                <img src={logoUfersaFlix}/>
+        <div>
+            <NavbarUser />
+            <div className="container">
                 <form className="formulario">
                     <div>
                         <h1 className="titulo">CADASTRE-SE</h1>
@@ -86,12 +118,22 @@ function Cadastro(){
                     onChange={onChange}
                     />
                     <br/>
+                    <label>CONFIRMAR SENHA</label>
+                    <br/>
+                    <input 
+                    type='password'
+                    id='confirmarSenha'
+                    name='confirmarSenha'
+                    value={values.confirmarSenha}
+                    onChange={onChange}
+                    />
+                    <br/>
                     <div>
                         <button className="botao-submit" type="submit" onClick={cadastrar}>CADASTRAR</button>
                         <button className="botao-voltar" type="submit" onClick={getBack}>VOLTAR</button>
                     </div>
                 </form>
-            </Container>
+            </div>
         </div>
     )
 }
